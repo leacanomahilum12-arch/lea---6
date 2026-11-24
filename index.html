@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lea's Monitoring System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>LEA'S MONITORING SYSTEM</h1>
+            <p>ESP32 DHT11 Firebase Monitoring Dashboard</p>
+        </div>
+        <div class="connection-status">
+            <span id="connectionDot" class="status-dot"></span>
+            <span id="connectionStatus">Connecting...</span>
+        </div>
+    </header>
+
+    <main class="dashboard">
+
+        <div class="main-layout">
+
+            <!-- LEFT SIDE: SENSOR AND MONITORING -->
+            <div class="main-content">
+
+                <section class="current-section">
+
+                    <div class="sensor-card temperature-card">
+                        <div class="sensor-icon">🌡️</div>
+                        <h2>Temperature</h2>
+                        <div id="currentTemperature" class="sensor-value">-- °C</div>
+                        <p>Current temperature</p>
+                    </div>
+
+                    <div class="sensor-card humidity-card">
+                        <div class="sensor-icon">💧</div>
+                        <h2>Humidity</h2>
+                        <div id="currentHumidity" class="sensor-value">-- %</div>
+                        <p>Current humidity</p>
+                    </div>
+
+                </section>
+
+                <section class="card graph-section">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Sensor Graph</h2>
+                            <p>Temperature and humidity readings</p>
+                        </div>
+                        <select id="graphDate">
+                            <option value="all">All Dates</option>
+                        </select>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="sensorChart"></canvas>
+                    </div>
+                </section>
+
+                <section class="card history-section">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>Sensor History</h2>
+                            <p>Recorded temperature and humidity</p>
+                        </div>
+
+                        <select id="historyDate">
+                            <option value="all">All Dates</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Temperature</th>
+                                    <th>Humidity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTable">
+                                <tr>
+                                    <td colspan="4">Waiting for sensor data...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button id="toggleHistory" class="secondary-button">
+                        Show / Hide History
+                    </button>
+
+                </section>
+
+            </div>
+
+            <!-- RIGHT SIDE: LED CONTROLS -->
+            <aside class="sidebar">
+
+                <section class="card relay-section">
+
+                    <div class="relay-heading">
+                        <h2>LED Controls</h2>
+                        <p>Manual relay control</p>
+                    </div>
+
+                    <div class="relay-card">
+                        <div class="sensor-icon">💡</div>
+                        <h3>LED 1</h3>
+                        <p>Relay 1 Control</p>
+
+                        <span id="relay1Status" class="relay-state">OFF</span>
+
+                        <button
+                            id="relay1Button"
+                            class="relay-button"
+                            onclick="toggleRelay(1)">
+                            TURN ON
+                        </button>
+                    </div>
+
+                    <div class="relay-card">
+                        <div class="sensor-icon">💡</div>
+                        <h3>LED 2</h3>
+                        <p>Relay 2 Control</p>
+
+                        <span id="relay2Status" class="relay-state">OFF</span>
+
+                        <button
+                            id="relay2Button"
+                            class="relay-button"
+                            onclick="toggleRelay(2)">
+                            TURN ON
+                        </button>
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+        <!-- WIFI SETTINGS -->
+        <section class="card wifi-section">
+            <div>
+                <h2>WiFi Settings</h2>
+                <p>Change the ESP32 WiFi connection.</p>
+            </div>
+
+            <a href="/change-wifi" class="wifi-button">
+                CHANGE WIFI
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>LEA'S MONITORING SYSTEM | ESP32 DHT11 FIREBASE</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>
